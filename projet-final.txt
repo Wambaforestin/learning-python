@@ -1,0 +1,263 @@
+Projet Final: Gestionnaire de Banque Simplifié
+Objectif : Créer une application Python qui simule un gestionnaire de comptes bancaires. L'utilisateur peut consulter le solde de son compte, déposer de l'argent, retirer de l'argent, et afficher l'historique des transactions.
+Fonctionnalités du projet :
+Création d'un compte :
+Demander à l'utilisateur de saisir son nom et de créer un compte avec un solde initial.
+Consultation du solde :
+L'utilisateur peut consulter le solde de son compte à tout moment.
+Dépôt d'argent :
+L'utilisateur peut déposer de l'argent sur son compte. Le montant est ajouté au solde.
+Retrait d'argent :
+L'utilisateur peut retirer de l'argent, à condition que le montant soit disponible sur son compte (le solde ne peut pas devenir négatif).
+Historique des transactions :
+Chaque dépôt ou retrait doit être enregistré dans l'historique des transactions, et l'utilisateur peut afficher cet historique.
+Menu d'options :
+L'utilisateur peut naviguer dans un menu avec différentes options (Consulter le solde, Déposer de l'argent, Retirer de l'argent, Afficher l'historique, Quitter).
+Ajout d’intérêts mensuels :
+Chaque mois, un taux d’intérêt est appliqué au solde du compte. Par exemple, un taux d’intérêt de 1% est ajouté au solde chaque mois.
+Le taux d’intérêt peut être défini lors de la création du compte.
+Possibilité de créer plusieurs comptes :
+L’utilisateur peut créer plusieurs comptes bancaires (par exemple, un compte épargne et un compte courant).
+L’utilisateur peut consulter, déposer, retirer, ou transférer de l’argent entre les différents comptes.
+Transfert d’argent entre comptes :
+L’utilisateur peut transférer de l’argent entre ses différents comptes (par exemple, transférer de l'argent d'un compte courant vers un compte épargne).
+Affichage des détails des comptes :
+L’utilisateur peut afficher une liste de tous ses comptes avec les soldes actuels et les taux d’intérêt associés.
+Ajout d’un code PIN pour chaque compte :
+Lors de la création de chaque compte, un code PIN est défini. Ce code PIN doit être saisi pour accéder au compte.
+
+Pseudo-code
+Fonction de création du compte :
+Demander le nom de l'utilisateur.
+Initialiser un solde à 0.
+Fonction pour consulter le solde :
+Afficher le solde actuel du compte.
+Fonction pour déposer de l'argent :
+Demander à l'utilisateur combien il souhaite déposer.
+Ajouter ce montant au solde.
+Fonction pour retirer de l'argent :
+Demander à l'utilisateur combien il souhaite retirer.
+Vérifier que le solde est suffisant.
+Retirer le montant du solde.
+Fonction pour afficher l'historique des transactions :
+Afficher la liste des dépôts et retraits effectués.
+Boucle principale :
+Afficher un menu d'options (1. Consulter le solde, 2. Déposer, 3. Retirer, 4. Historique, 5. Quitter).
+Répéter l'action choisie jusqu'à ce que l'utilisateur décide de quitter.
+Création de plusieurs comptes :
+Lors de la création, chaque compte a un nom unique, un solde initial, un taux d’intérêt et un code PIN.
+Application des intérêts mensuels :
+À chaque début de mois, un intérêt est calculé et ajouté au solde du compte.
+Transfert d’argent entre comptes :
+L’utilisateur peut sélectionner un compte source et un compte cible pour transférer de l’argent.
+Vérifier que le compte source a un solde suffisant.
+Affichage des détails de chaque compte :
+Afficher le solde, le taux d’intérêt et la date de la dernière application des intérêts.
+Sécurité avec code PIN :
+Lors de l’accès à un compte, l’utilisateur doit entrer le code PIN correspondant pour effectuer des actions.
+
+template : 
+
+class CompteBancaire:
+    def __init__(self, nom, solde_initial=0, taux_interet=0.01):
+        self.nom = nom
+        self.solde = solde_initial
+        self.taux_interet = taux_interet
+        self.historique = []
+
+    def consulter_solde(self):
+        return f"Le solde du compte {self.nom} est de {self.solde} euros."
+    
+    def deposer(self, montant):
+        if montant > 0:
+            self.solde += montant
+            self.historique.append(f"Dépôt de {montant} euros.")
+            return f"Dépôt de {montant} euros effectué avec succès."
+        else:
+            return "Montant invalide pour le dépôt."
+    
+    def retirer(self, montant):
+        if montant > 0 and montant <= self.solde:
+            self.solde -= montant
+            self.historique.append(f"Retrait de {montant} euros.")
+            return f"Retrait de {montant} euros effectué avec succès."
+        else:
+            return "Montant invalide pour le retrait."
+        
+    def appliquer_interets_mensuels(self):
+        interets = self.solde * self.taux_interet
+        self.solde += interets
+        self.historique.append(f"Application des intérêts mensuels : {interets} euros.")
+        return f"Intérêts mensuels appliqués : {interets} euros."
+
+
+class Utilisateur:
+    def __init__(self, identifiant, pin):
+        self.identifiant = identifiant
+        self.pin = pin
+        self.comptes = {}
+
+    def creer_compte(self, nom, solde_initial=0, taux_interet=0.01):
+        if nom in self.comptes:
+            print(f"Le compte {nom} existe déjà.")
+        else:
+            self.comptes[nom] = CompteBancaire(nom, solde_initial, taux_interet)
+            print(f"Compte {nom} créé avec succès.")
+
+    def supprimer_compte(self, nom):
+        if nom in self.comptes:
+            del self.comptes[nom]
+            print(f"Compte {nom} supprimé avec succès.")
+        else:
+            print(f"Le compte {nom} n'existe pas.")
+
+    def consulter_comptes(self):
+        for compte in self.comptes.values():
+            print(compte.consulter_solde())
+
+    def consulter_historique(self, nom):
+        if nom in self.comptes:
+            return self.comptes[nom].historique
+        else:
+            return "Compte non trouvé."
+
+    def effectuer_transfert(self, source, destination, montant):
+        if source in self.comptes and destination in self.comptes:
+            if self.comptes[source].solde >= montant:
+                self.comptes[source].retirer(montant)
+                self.comptes[destination].deposer(montant)
+                return f"Transfert de {montant} euros effectué avec succès de {source} à {destination}."
+            else:
+                return "Solde insuffisant pour le transfert."
+
+
+class GestionnaireBanque:
+    def __init__(self):
+        self.utilisateurs = {}
+
+    def creer_utilisateur(self, identifiant, pin):
+        if identifiant in self.utilisateurs:
+            print(f"L'utilisateur {identifiant} existe déjà.")
+        else:
+            self.utilisateurs[identifiant] = Utilisateur(identifiant, pin)
+            print(f"Utilisateur {identifiant} créé avec succès.")
+    
+    def supprimer_utilisateur(self, identifiant):
+        if identifiant in self.utilisateurs:
+            del self.utilisateurs[identifiant]
+            print(f"Utilisateur {identifiant} supprimé avec succès.")
+        else:
+            print(f"L'utilisateur {identifiant} n'existe pas.")
+    
+    def verifier_identifiant(self, identifiant, pin):
+        if identifiant in self.utilisateurs and self.utilisateurs[identifiant].pin == pin:
+            return True
+        else:
+            return False
+
+    def menu(self):
+        while True:
+            print("\nMenu :")
+            print("1. Créer un utilisateur")
+            print("2. Se connecter")
+            print("3. Quitter")
+            
+            choix = input("Veuillez entrer votre choix : ")
+
+            if choix == "1":
+                identifiant = input("Veuillez entrer votre identifiant : ")
+                pin = input("Veuillez entrer votre PIN : ")
+                self.creer_utilisateur(identifiant, pin)
+
+            elif choix == "2":
+                identifiant = input("Veuillez entrer votre identifiant : ")
+                pin = input("Veuillez entrer votre PIN : ")
+
+                if self.verifier_identifiant(identifiant, pin):
+                    utilisateur = self.utilisateurs[identifiant]
+                    self.menu_utilisateur(utilisateur)
+                else:
+                    print("Identifiant ou PIN incorrect.")
+
+            elif choix == "3":
+                print("Merci pour votre visite. Au revoir !")
+                break
+
+            else:
+                print("Choix invalide. Veuillez réessayer.")
+    
+    def menu_utilisateur(self, utilisateur):
+        while True:
+            print("\nMenu Utilisateur :")
+            print("1. Créer un compte")
+            print("2. Supprimer un compte")
+            print("3. Consulter les comptes")
+            print("4. Déposer de l'argent")
+            print("5. Retirer de l'argent")
+            print("6. Appliquer les intérêts mensuels")
+            print("7. Consulter l'historique d'un compte")
+            print("8. Effectuer un transfert entre vos comptes")
+            print("9. Se déconnecter")
+            
+            choix = input("Veuillez entrer votre choix : ")
+
+            if choix == "1":
+                nom = input("Veuillez entrer le nom du compte : ")
+                solde_initial = float(input("Veuillez entrer le solde initial : "))
+                taux_interet = float(input("Veuillez entrer le taux d'intérêt : "))
+                utilisateur.creer_compte(nom, solde_initial, taux_interet)
+
+            elif choix == "2":
+                nom = input("Veuillez entrer le nom du compte à supprimer : ")
+                utilisateur.supprimer_compte(nom)
+
+            elif choix == "3":
+                utilisateur.consulter_comptes()
+
+            elif choix == "4":
+                nom = input("Veuillez entrer le nom du compte : ")
+                montant = float(input("Veuillez entrer le montant à deposer : "))
+                if nom in utilisateur.comptes:
+                    print(utilisateur.comptes[nom].deposer(montant))
+                else:
+                    print("Compte non trouvé.")
+
+            elif choix == "5":
+                nom = input("Veuillez entrer le nom du compte : ")
+                montant = float(input("Veuillez entrer le montant à retirer : "))
+                if nom in utilisateur.comptes:
+                    print(utilisateur.comptes[nom].retirer(montant))
+                else:
+                    print("Compte non trouvé.")
+            
+            elif choix == "6":
+                nom = input("Veuillez entrer le nom du compte : ")
+                if nom in utilisateur.comptes:
+                    print(utilisateur.comptes[nom].appliquer_interets_mensuels())
+                else:
+                    print("Compte non trouvé.")
+
+            elif choix == "7":
+                nom = input("Veuillez entrer le nom du compte : ")
+                if nom in utilisateur.comptes:
+                    print(utilisateur.consulter_historique(nom))
+                else:
+                    print("Compte non trouvé.")
+
+            elif choix == "8":
+                source = input("Veuillez entrer le nom du compte source : ")
+                destination = input("Veuillez entrer le nom du compte destination : ")
+                montant = float(input("Veuillez entrer le montant du transfert : "))
+                print(utilisateur.effectuer_transfert(source, destination, montant))
+
+            elif choix == "9":
+                print("Déconnexion en cours...")
+                break
+
+            else:
+                print("Choix invalide. Veuillez réessayer.")
+
+
+if __name__ == "__main__":
+    gestionnaire = GestionnaireBanque()
+    gestionnaire.menu()
