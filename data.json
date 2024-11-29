@@ -1,0 +1,23 @@
+{
+    "employees": [
+        {
+            "name": "Florian",
+            "age": 30,
+            "department": "Engineering"
+        },
+        {
+            "name": "Sam",
+            "age": 25,
+            "department": "Sales"
+        },
+        {
+            "name": "Mateo",
+            "age": 35,
+            "department": "Human Resources"
+        }
+    ],
+    "company": {
+        "name": "AXA",
+        "location": "Paris, France"
+    }
+}

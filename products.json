@@ -1,0 +1,47 @@
+{
+    "products": [
+        {
+            "name": "Laptop",
+            "category": "Electronics",
+            "price": 1200,
+            "stock": 50,
+            "stock_quantity": 50
+        },
+        {
+            "name": "Smartphone",
+            "category": "Electronics",
+            "price": 800,
+            "stock": 100
+        },
+        {
+            "name": "Tablet",
+            "category": "Electronics",
+            "price": 300,
+            "stock": 75
+        },
+        {
+            "name": "Smartwatch",
+            "category": "Accessories",
+            "price": 150,
+            "stock": 150
+        },
+        {
+            "name": "Headphones",
+            "category": "Accessories",
+            "price": 100,
+            "stock": 200
+        },
+        {
+            "name": "Chair",
+            "category": "Furniture",
+            "price": 150,
+            "stock": 60
+        },
+        {
+            "name": "Desk",
+            "category": "Furniture",
+            "price": 300,
+            "stock": 30
+        }
+    ]
+}
