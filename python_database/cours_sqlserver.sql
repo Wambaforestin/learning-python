@@ -195,6 +195,22 @@ SELECT nom FROM commandes;
 SELECT nom, prenom
 FROM clients
 WHERE id IN (SELECT id_client FROM commandes WHERE date_commande = '2022-01-01');
+-- exemple de sous-requête avec EXISTS, pour vérifier l'existence d'une valeur dans une autre table
+SELECT nom, prenom
+FROM clients
+WHERE EXISTS (SELECT * FROM commandes WHERE clients.id = commandes.id_client); -- si la sous-requête retourne au moins une ligne, la condition est vraie au contraire elle est fausse
+
+-- exemple de sous-requête dans avec ALL, ANY, SOME
+-- ALL : retourne TRUE si la condition est vraie pour toutes les valeurs de la sous-requête
+SELECT nom, prenom
+FROM clients
+WHERE id = ALL (SELECT id_client FROM commandes WHERE date_commande = '2022-01-01'); -- retourne les clients qui ont passé toutes leurs commandes à la date '2022-01-01'
+
+-- ANY ou SOME : retourne TRUE si la condition est vraie pour au moins une valeur de la sous-requête
+SELECT nom, prenom
+FROM clients
+WHERE id = ANY (SELECT id_client FROM commandes WHERE date_commande = '2022-01-01'); -- retourne les clients qui ont passé au moins une commande à la date '2022-01-01'
+
 
 -- Différence entre une sous-requête et une jointure
 -- Une sous-requête est une requête imbriquée dans une autre requête
