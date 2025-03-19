@@ -136,6 +136,28 @@ ALTER TABLE clients RENAME COLUMN nom TO nom_client;
 ALTER TABLE clients RENAME TO customers;
 
 
+-- Autre UPPER, LOWER, LENGTH, SUBSTRING, REPLACE, TRIM, CONCAT, NOW, CURDATE, CURTIME, etc.
+-- exemple de requête avec UPPER (convertit une chaîne de caractères en majuscules)
+SELECT UPPER(nom) FROM clients;
+-- exemple de requête avec LOWER (convertit une chaîne de caractères en minuscules)
+SELECT LOWER(nom) FROM clients;
+-- exemple de requête avec LENGTH (retourne la longueur d'une chaîne de caractères)
+SELECT LENGTH(nom) FROM clients;
+-- exemple de requête avec SUBSTRING (retourne une partie d'une chaîne de caractères)
+SELECT SUBSTRING(nom, 1, 3) FROM clients;
+-- exemple de requête avec REPLACE (remplace une partie d'une chaîne de caractères par une autre)
+SELECT REPLACE(nom, 'Doe', 'Smith') FROM clients;
+-- exemple de requête avec TRIM (supprime les espaces en début et fin de chaîne de caractères)
+SELECT TRIM(nom) FROM clients;
+-- exemple de requête avec CONCAT (concatène plusieurs chaînes de caractères)
+SELECT CONCAT(nom, ' ', prenom) FROM clients;
+-- exemple de requête avec NOW (retourne la date et l'heure actuelles)
+SELECT NOW();
+-- exemple de requête avec CURDATE (retourne la date actuelle)
+SELECT CURDATE();
+-- exemple de requête avec CURTIME (retourne l'heure actuelle)
+SELECT CURTIME();
+
 -- les Jointures en SQLSERVER
 
 -- INNER JOIN : retourne les lignes lorsque qu'il y a au moins une correspondance dans les deux tables
@@ -163,10 +185,22 @@ SELECT nom FROM clients
 UNION
 SELECT nom FROM commandes;
 
--- INTERSECT : permet de combiner les résultats de deux requêtes SQL en une seule en ne gardant que les lignes communes
+-- INTERSECT : permet de combiner les résultats de deux requêtes SQL en une seule en ne gardant que les lignes communes (c'est-à-dire les lignes qui apparaissent dans les deux résultats)
 SELECT nom FROM clients
 INTERSECT
 SELECT nom FROM commandes;
+
+-- les sous-requêtes en SQLSERVER
+-- exemple de sous-requête dans une clause WHERE
+SELECT nom, prenom
+FROM clients
+WHERE id IN (SELECT id_client FROM commandes WHERE date_commande = '2022-01-01');
+
+-- Différence entre une sous-requête et une jointure
+-- Une sous-requête est une requête imbriquée dans une autre requête
+-- Une jointure est une opération qui combine les lignes de deux tables en fonction d'une condition de correspondance entre les colonnes de ces tables
+-- Une sous-requête est généralement utilisée pour filtrer les résultats d'une requête principale
+-- Une jointure est généralement utilisée pour combiner les données de deux tables en une seule requête
 
 
 /*
@@ -189,3 +223,4 @@ SELECT nom FROM commandes;
   Table de dimensions/réference : table qui contient les informations détaillées sur les données (ex : clients, produits, catégories)
   Table de jointure : table qui permet de lier les tables de faits et de dimensions (ex : commandes_produits)
 */
+
