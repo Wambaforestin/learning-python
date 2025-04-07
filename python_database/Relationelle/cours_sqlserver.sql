@@ -17,6 +17,7 @@ Vue : requête SQL stockée dans la base de données
 Procédure stockée : ensemble d'instructions SQL stockées dans la base de données
 Déclencheur : ensemble d'instructions SQL qui s'exécutent automatiquement en réponse à un événement
 Transaction : ensemble d'instructions SQL qui doivent être
+Agrégation : opération qui permet de regrouper des données et de calculer des valeurs agrégées (somme, moyenne, etc.)
 ---------------------------------------------------------------------
 LDD : Langage de Définition de Données, par exemple : CREATE DATABASE, CREATE TABLE 
 LMD : Langage de Manipulation de Données, par exemple : INSERT, UPDATE, DELETE
@@ -33,6 +34,31 @@ Différence entre une procédure stockée et une fonction stockée :
 - Une fonction stockée ne peut pas appeler une procédure stockée
 - Une procédure stockée peut être appelée directement
 - Une fonction stockée doit être appelée dans une requête SELECT
+
+Propriétés ACID (Atomicité, Cohérence, Isolation, Durabilité) :
+
+- Atomicité : une transaction est considérée comme un tout, elle doit être entièrement exécutée ou pas du tout 
+    Pourquoir le mot "Atomicité" ? 
+    Parce que la transaction est indivisible, elle ne peut pas être divisée en plusieurs parties
+    Si une partie de la transaction échoue, toute la transaction échoue et la base de données reste inchangéei
+- Cohérence : une transaction doit amener la base de données d'un état valide à un autre état valide
+- Isolation : les transactions concurrentes doivent être isolées les unes des autres, elles ne doivent pas interférer entre elles
+    Par exemple, si deux transactions essaient de modifier la même donnée en même temps, l'une doit attendre que l'autre se termine avant de continuer
+    Pour garantir l'isolation, les SGBD utilisent des mécanismes de verrouillage (locking) et de gestion des transactions
+- Durabilité : une fois qu'une transaction est validée, ses effets doivent être permanents, même en cas de panne du système
+
+NORMALISATION : processus de structuration des données dans une base de données pour réduire la redondance et améliorer l'intégrité des données
+- 1ère forme normale (1NF) : chaque colonne doit contenir des valeurs atomiques, pas de groupes répétitifs
+        Par exemple, une colonne ne doit pas contenir plusieurs valeurs séparées par des virgules
+        Chaque valeur doit être unique et identifiable
+        Par exemple, une table de clients ne doit pas contenir une colonne "téléphone" avec plusieurs numéros de téléphone séparés par des virgules
+- 2ème forme normale (2NF) : chaque colonne non clé doit dépendre de la clé primaire, pas de dépendances partielles
+        Par exemple, si une table a une clé primaire composée de plusieurs colonnes, chaque colonne non clé doit dépendre de toutes les colonnes de la clé primaire
+        Par exemple, une table de commandes avec une clé primaire composée de "id_client" et "id_produit" ne doit pas avoir de colonne "nom_client" qui dépend uniquement de "id_client"
+        Cela signifie que chaque colonne non clé doit dépendre de la clé primaire dans son ensemble, pas seulement d'une partie de celle-ci
+- 3ème forme normale (3NF) : chaque colonne non clé doit dépendre uniquement de la clé primaire, pas de dépendances transitives
+        Par exemple, si une table a une colonne "nom_client" qui dépend de "id_client", et que "id_client" dépend de "id_commande", alors "nom_client" ne doit pas être stocké dans la table de commandes
+        Cela signifie que chaque colonne non clé doit dépendre uniquement de la clé primaire, pas d'une autre colonne non clé
 
 */
 
@@ -248,5 +274,6 @@ WHERE id = ANY (SELECT id_client FROM commandes WHERE date_commande = '2022-01-0
   Table de faits : table qui contient les données à analyser (ex : commandes)
   Table de dimensions/réference : table qui contient les informations détaillées sur les données (ex : clients, produits, catégories)
   Table de jointure : table qui permet de lier les tables de faits et de dimensions (ex : commandes_produits)
+
 */
 
