@@ -102,7 +102,15 @@ DROP TABLE IF EXISTS clients;
 -- Supprimer une base de données
 DROP DATABASE IF EXISTS cours_sqlserver;
 
--- Autre ORDER BY, GROUP BY, HAVING, JOIN, UNION, INTERSECT, EXCEPT, LIMIT, OFFSET, DISTINCT ,TRUNCATE etc.
+-- Autre ORDER BY, GROUP BY, HAVING, JOIN, UNION, INTERSECT, EXCEPT, LIMIT, OFFSET, DISTINCT ,TRUNCATE BETWEEN, IN, LIKE, IS NULL, IS NOT NULL, etc.
+-- exemple de requête avec BETWEEN (sélectionner les valeurs dans une plage donnée)
+SELECT nom, prenom FROM clients WHERE id BETWEEN 1 AND 5;
+-- exemple de requête avec IN (sélectionner les valeurs qui correspondent à une liste de valeurs)
+SELECT nom, prenom FROM clients WHERE id IN (1, 2, 3);
+-- exemple de requête avec LIKE (sélectionner les valeurs qui correspondent à un motif)
+SELECT nom, prenom FROM clients WHERE nom LIKE 'D%';
+-- exemple de requête avec IS NULL (sélectionner les valeurs nulles)
+SELECT nom, prenom FROM clients WHERE email IS NULL;
 -- exemple de requête avec ORDER BY (tri des données)
 SELECT nom, prenom FROM clients ORDER BY nom ASC;
 -- exemple de requête avec GROUP BY (regrouper les données)
@@ -134,6 +142,8 @@ ALTER TABLE clients DROP COLUMN telephone;
 ALTER TABLE clients RENAME COLUMN nom TO nom_client;
 -- renommer une table
 ALTER TABLE clients RENAME TO customers;
+-- exemple de requête pour modifier une colonne
+ALTER TABLE clients ALTER COLUMN nom VARCHAR(100);
 
 
 -- Autre UPPER, LOWER, LENGTH, SUBSTRING, REPLACE, TRIM, CONCAT, NOW, CURDATE, CURTIME, etc.
