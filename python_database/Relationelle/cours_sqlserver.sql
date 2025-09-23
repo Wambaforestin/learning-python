@@ -4,6 +4,9 @@ cours d'sqlserver : Apprendre à manipuler les bases de données avec SQL Server
 
 -- Définition des termes
 /* 
+Relationnelle : modèle de données basé sur des relations entre les données
+Non relationnelle : modèle de données basé sur des documents, des graphes ou des colonnes
+NoSQL : Not Only SQL, modèle de données non relationnel
 SGBD : Système de Gestion de Base de Données (SQL Server, MySQL, Oracle, PostgreSQL, SQLite, etc.)
 Base de données : ensemble de données organisées et structurées en tables
 Table/Entité : ensemble de données organisées en lignes et colonnes
@@ -60,6 +63,14 @@ NORMALISATION : processus de structuration des données dans une base de donnée
         Par exemple, si une table a une colonne "nom_client" qui dépend de "id_client", et que "id_client" dépend de "id_commande", alors "nom_client" ne doit pas être stocké dans la table de commandes
         Cela signifie que chaque colonne non clé doit dépendre uniquement de la clé primaire, pas d'une autre colonne non clé
 
+
+propriétés BASE pour les bases de données NoSQL : Basically Available, Soft state, Eventually consistent
+- Basically Available : la base de données est toujours disponible, même en cas de panne d'un nœud ou d'une partition
+- Soft state : l'état de la base de données peut changer au fil du temps, même sans nouvelles écritures
+- Eventually consistent : la base de données finira par être cohérente, mais pas nécessairement immédiatement
+    Par exemple, si une base de données NoSQL est partitionnée en plusieurs nœuds, les données peuvent être mises à jour sur un nœud sans que les autres nœuds soient immédiatement informés
+    Cela signifie que les données peuvent être incohérentes pendant un certain temps, mais elles finiront par être synchronisées
+    Cela permet d'améliorer la disponibilité et la tolérance aux pannes, mais cela peut entraîner des incohérences temporaires dans les données
 */
 
 --montrer les bases de données
