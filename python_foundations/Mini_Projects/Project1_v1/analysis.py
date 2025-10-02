@@ -5,7 +5,7 @@ def compter_mots(texte: str) -> int:
 
 def compter_phrases(texte: str) -> int:
     # compte le nombre de phrases
-    return len(split_en_phrases(nettoyer_texte(texte)))
+    return len(split_en_phrases(texte))
 
 def mot_plus_frequent(mots: list[str]) -> tuple[str, int]:
     # recupère le nombre de mots avec leurs frequences
