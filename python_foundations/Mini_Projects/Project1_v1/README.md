@@ -1,6 +1,6 @@
-## PROJET 1 : Analyseur de Texte Interactif
+# PROJET 1 : Analyseur de Texte Interactif
 
-### Description
+## Description
 
 Un programme CLI qui analyse un texte saisi par l’utilisateur (ou collé) et fournit des statistiques : nombre de mots, de phrases, fréquence des mots, mots les plus longs, etc.
 
