@@ -1,0 +1,9 @@
+# ignore cash files
+*.pyc
+__pycache__/
+# ignore environment folders
+env/
+venv/
+.venv/
+# ignore IDE specific files
+.vscode/
