@@ -1,0 +1,22 @@
+{
+  "entreprise": "Tech Innov",
+  "employes": [
+    {
+      "nom": "Borel",
+      "poste": "Développeur Python",
+      "projets": ["ERP interne", "Automatisation des rapports"]
+    },
+    {
+      "nom": "Mélanie",
+      "poste": "Analyste de données",
+      "projets": ["Tableaux de bord", "Prévisions de ventes"]
+    },
+    {
+      "nom": "Youssef",
+      "poste": "Développeur Web",
+      "projets": ["Site e-commerce", "API REST"]
+    }
+  ],
+  "localisation": "Paris",
+  "annee": 2025
+}
