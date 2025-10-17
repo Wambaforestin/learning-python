@@ -1,6 +1,5 @@
-Nom,Âge,Formation,Compétence principale
-Borel,22,Informatique,Python
-Mélanie,21,Marketing,Data Analysis
-Youssef,23,Informatique,Développement Web
-Lina,20,Design,UI/UX
-Jean,24,Finance,SQL
+nom,poste,annee_debut
+Florien,Ingénieure Logiciel,2018
+Matt,Designer UI/UX,2020
+Charlie,Chef de projet SAP,2016
+Robbert,Comptable financier,2002
