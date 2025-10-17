@@ -1,0 +1,15 @@
+{
+    "nom": "Projet Alpha",
+    "version": 1.2,
+    "membres": [
+        {
+            "nom": "Alice",
+            "role": "lead"
+        },
+        {
+            "nom": "Bob",
+            "role": "dev"
+        }
+    ],
+    "actif": true
+}
