@@ -1,8 +1,10 @@
-# Mon Apprentissage du Langage Python 
+# Mon Apprentissage du Langage Python pour Devenir Data Ingenieur
 
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" height="25">
 
-Ici, je documente mes progrès, mes exercices, et les concepts que j’apprends au fur et à mesure de mon parcours avec Python.
+<img src="https://img.icons8.com/ios-filled/50/000000/data-configuration.png" alt="Data Engineer" height="25">
+
+Ici, je documente mes progrès, mes exercices, et les concepts que j’apprends au fur et à mesure de mon parcours avec Python pour devenir un Data Ingenieur compétent.
 
 ---
 
